@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Financial News</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+
+/* News Header */
+.news-header {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+select, .btn {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    margin: 5px;
+}
+
+.btn {
+    background: #ffcc00;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #e6b800;
+}
+
+/* News Ticker */
+.news-ticker-container {
+    background: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    
+    padding: 20px 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    margin-top: 20px;
+}
+
+.news-ticker {
+    display: inline-block;
+    position: absolute;
+    animation: tickerMove 10s linear infinite;
+}
+
+@keyframes tickerMove {
+    from {
+        left: 100%;
+    }
+    to {
+        left: -100%;
+    }
+}
+
+/* News List */
+.news-container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.news-article {
+    background: #fff;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.news-article img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+h3 {
+    margin: 10px 0;
+    color: #333;
+}
+
+</style>
+<body>
+
+    <div class="news-header">
+        <h1>Live Financial News</h1>
+        <select id="news-category">
+            <option value="business">Business</option>
+        </select>
+        <button id="fetch-news" class="btn">Get News</button>
+    </div>
+
+    <!-- News Ticker -->
+    <div class="news-ticker-container">
+        <div class="news-ticker" id="news-ticker">
+            <p>Loading latest financial updates...</p>
+        </div>
+    </div>
+
+    <!-- News List -->
+    <div class="news-container">
+        <h2>Latest Headlines</h2>
+        <div id="news-list"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const newsList = document.getElementById("news-list");
+            const newsTicker = document.getElementById("news-ticker");
+            const categorySelect = document.getElementById("news-category");
+            const fetchNewsBtn = document.getElementById("fetch-news");
+
+            // Replace with a valid API Key from https://newsapi.org/
+            const API_KEY = "96a827c1b16341bb99d23a712d5a0c0c";
+
+            function fetchNews(category = "business") {
+                const NEWS_URL = `https://newsapi.org/v2/top-headlines?category=${category}&country=us&apiKey=${API_KEY}`;
+
+                fetch(NEWS_URL)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.articles) {
+                            // Update News Ticker
+                            newsTicker.innerHTML = data.articles
+                                .slice(0, 5)
+                                .map(article => `<span>${article.title} | </span>`)
+                                .join("");
+
+                            // Update News List
+                            newsList.innerHTML = "";
+                            data.articles.slice(0, 5).forEach((article) => {
+                                const articleElement = document.createElement("div");
+                                articleElement.classList.add("news-article");
+                                articleElement.innerHTML = `
+                                    <img src="${article.urlToImage || 'placeholder.jpg'}" alt="News">
+                                    <h3>${article.title}</h3>
+                                    <p>${article.description || "No description available."}</p>
+                                    <a href="${article.url}" target="_blank" class="btn">Read More</a>
+                                `;
+                                newsList.appendChild(articleElement);
+                            });
+                        } else {
+                            newsList.innerHTML = "<p>No news available at the moment.</p>";
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching news:", error);
+                        newsList.innerHTML = "<p>Failed to load news. Try again later.</p>";
+                    });
+            }
+
+            // Fetch news on button click
+            fetchNewsBtn.addEventListener("click", () => {
+                fetchNews(categorySelect.value);
+            });
+
+            // Auto-refresh news every 30 seconds
+            setInterval(() => fetchNews(categorySelect.value), 30000);
+
+            // Fetch default news on page load
+            fetchNews();
+        });
+    </script>
+
+</body>
+</html>

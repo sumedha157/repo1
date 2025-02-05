@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Literacy Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Quiz Container */
+.quiz-container {
+    background: white;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.question {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+input {
+    margin-right: 10px;
+}
+
+button {
+    background: #ffcc00;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #e6b800;
+}
+
+#results {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+</style>
+<body>
+
+    <div class="quiz-container">
+        <h1>Financial Literacy Test 2</h1>
+        <p>Test your financial knowledge by answering these questions.</p>
+
+        <div id="quiz"></div>
+
+        <button id="submit">Submit Answers</button>
+        <div id="results"></div>
+    </div>
+
+    <script>
+// Questions Array
+const questions = [
+    {
+        question: "What percentage of your income should ideally be saved for emergencies?",
+        answers: {
+            a: "5%",
+            b: "10%",
+            c: "20%"
+        },
+        correct: "c"
+    },
+    {
+        question: "Which budgeting rule follows the 50/30/20 principle?",
+        answers: {
+            a: "50% on needs, 30% on wants, 20% on savings",
+            b: "50% on savings, 30% on rent, 20% on travel",
+            c: "50% on debt, 30% on investment, 20% on groceries"
+        },
+        correct: "a"
+    },
+    {
+        question: "What is the main purpose of a credit score?",
+        answers: {
+            a: "To measure your wealth",
+            b: "To show your ability to repay loans",
+            c: "To track your monthly expenses"
+        },
+        correct: "b"
+    },
+    {
+        question: "Which of the following is considered a low-risk investment?",
+        answers: {
+            a: "Stocks",
+            b: "Bonds",
+            c: "Cryptocurrency"
+        },
+        correct: "b"
+    },
+    {
+        question: "What does APR stand for in loans and credit cards?",
+        answers: {
+            a: "Annual Percentage Rate",
+            b: "Automated Payment Record",
+            c: "Average Personal Revenue"
+        },
+        correct: "a"
+    }
+];
+
+// Generate Quiz
+function buildQuiz() {
+    const quizContainer = document.getElementById("quiz");
+    let output = "";
+
+    questions.forEach((q, index) => {
+        output += `<div class="question">
+            <p>${index + 1}. ${q.question}</p>`;
+
+        for (const option in q.answers) {
+            output += `
+                <label>
+                    <input type="radio" name="question${index}" value="${option}">
+                    ${q.answers[option]}
+                </label><br>
+            `;
+        }
+
+        output += '</div>';
+    });
+
+    quizContainer.innerHTML = output;
+}
+
+// Show Results
+function showResults() {
+    let score = 0;
+
+    questions.forEach((q, index) => {
+        const selected = document.querySelector('input[name="question${index}"]:checked');
+        if (selected && selected.value === q.correct) {
+            score++;
+        }
+    });
+
+    const resultContainer = document.getElementById("results");
+    resultContainer.innerHTML = 'You scored ${score} out of ${questions.length}!';
+}
+
+// Load Quiz
+document.addEventListener("DOMContentLoaded", buildQuiz);
+document.getElementById("submit").addEventListener("click", showResults);
+
+    </script>
+</body>
+</html>

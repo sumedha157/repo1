@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Literacy Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Quiz Container */
+.quiz-container {
+    background: white;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.question {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+input {
+    margin-right: 10px;
+}
+
+button {
+    background: #ffcc00;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #e6b800;
+}
+
+#results {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+</style>
+<body>
+
+    <div class="quiz-container">
+        <h1>Financial Literacy Test 3</h1>
+        <p>Test your financial knowledge by answering these questions.</p>
+
+        <div id="quiz"></div>
+
+        <button id="submit">Submit Answers</button>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        // Questions Array
+        const questions = [
+            {
+                question: "What is the primary purpose of a budget?",
+                answers: {
+                    a: "To plan how to spend money",
+                    b: "To increase debt",
+                    c: "To avoid paying taxes"
+                },
+                correct: "a"
+            },
+            {
+                question: "What is an emergency fund used for?",
+                answers: {
+                    a: "Investing in stocks",
+                    b: "Unexpected expenses",
+                    c: "Buying luxury items"
+                },
+                correct: "b"
+            },
+            {
+                question: "What does a credit score represent?",
+                answers: {
+                    a: "Your annual income",
+                    b: "Your ability to repay loans",
+                    c: "Your total savings"
+                },
+                correct: "b"
+            },
+            {
+                question: "Which investment typically has the lowest risk?",
+                answers: {
+                    a: "Stocks",
+                    b: "Bonds",
+                    c: "Cryptocurrency"
+                },
+                correct: "b"
+            },
+            {
+                question: "Why is diversification important in investing?",
+                answers: {
+                    a: "To increase risk",
+                    b: "To spread risk across investments",
+                    c: "To invest in only one company"
+                },
+                correct: "b"
+            }
+        ];
+        
+        // Generate Quiz
+        function buildQuiz() {
+            const quizContainer = document.getElementById("quiz");
+            let output = "";
+        
+            questions.forEach((q, index) => {
+                output += `<div class="question">
+                    <p>${index + 1}. ${q.question}</p>`;
+        
+                for (const option in q.answers) {
+                    output += `
+                        <label>
+                            <input type="radio" name="question${index}" value="${option}">
+                            ${q.answers[option]}
+                        </label><br>
+                    `;
+                }
+        
+                output += `</div>`;
+            });
+        
+            quizContainer.innerHTML = output;
+        }
+        
+        // Show Results
+        function showResults() {
+            let score = 0;
+        
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selected && selected.value === q.correct) {
+                    score++;
+                }
+            });
+        
+            const resultContainer = document.getElementById("results");
+            resultContainer.innerHTML = `You scored ${score} out of ${questions.length}!`;
+        }
+        
+        // Load Quiz
+        document.addEventListener("DOMContentLoaded", buildQuiz);
+        document.getElementById("submit").addEventListener("click", showResults);
+    </script>
+</body>
+</html>

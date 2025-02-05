@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology Articles - Content Curation Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+        }
+        #search {
+            width: 50%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        /* Navigation Styling */
+        nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .filter-btn {
+            background-color: rgb(38, 39, 39);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filter-btn:hover {
+            background-color: #16a085;
+        }
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Articles Section */
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .article-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .article-card h2 {
+            padding: 15px;
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .article-card p {
+            padding: 0 15px;
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        .article-card a {
+            display: block;
+            padding: 10px 15px;
+            background-color: rgb(38, 39, 39);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1rem;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .article-card a:hover {
+            background-color: #16a085;
+        }
+
+        /* Media Query for Smaller Screens */
+        @media screen and (max-width: 768px) {
+            .articles {
+                grid-template-columns: 1fr 1fr;
+            }
+            #search {
+                width: 80%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .articles {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Technology Articles</h1>
+        <input type="text" id="search" placeholder="Search articles...">
+    </header>
+
+    <nav>
+        <a href="./all.html"><button class="filter-btn" data-category="all">All</button>  </a>
+        <a href="./finance.html"><button class="filter-btn" data-category="finance">Finance</button> </a>
+        <a href="./technology.html"><button class="filter-btn" data-category="technology">Technology</button> </a>
+        <a href="./education.html"><button class="filter-btn" data-category="education">Education</button> </a>
+        <a href="./home.html" class="back-btn" style="text-decoration: none; color: #2c3e50;"><button class="filter-btn" data-category="education">HOME</button></a>
+
+    </nav>
+
+    <main>
+        <section class="articles">
+            <!-- <div class="article-card" data-category="technology">
+                <img src="https://via.placeholder.com/300x200" alt="AI in Business">
+                <h2>The Rise of AI in Business</h2>
+                <p>How artificial intelligence is transforming industries worldwide.</p>
+                <a href="#">Read More</a>
+            </div> -->
+
+            <div class="article-card" data-category="technology">
+                <img src="https://via.placeholder.com/300x200" alt="5G Networks">
+                <h2>5G Networks: The Future of Connectivity</h2>
+                <p>Explore the impact of 5G technology on communication and industries.</p>
+                <a href="#">Read More</a>
+            </div>
+
+            <div class="article-card" data-category="technology">
+                <img src="https://via.placeholder.com/300x200" alt="Cybersecurity Trends">
+                <h2>Cybersecurity in 2025: What to Expect</h2>
+                <p>Predictions and trends in cybersecurity for the coming years.</p>
+                <a href="#">Read More</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

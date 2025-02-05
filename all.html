@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest in Technology</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        #search {
+            margin-top: 10px;
+            padding: 10px;
+            width: 50%;
+            border: none;
+            border-radius: 5px;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        .filter-btn {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #0f3460;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover {
+            background: #e94560;
+        }
+
+        .articles {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .article-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 320px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .article-card h2 {
+            font-size: 18px;
+            color: #0f3460;
+        }
+
+        .article-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 15px;
+            background: #1a1a2e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Latest in Technology</h1>
+        <input type="text" id="search" placeholder="Search technology articles...">
+    </header>
+
+    <nav>
+        <a href="./all.html"><button class="filter-btn" data-category="all">All</button>  </a>
+        <a href="./finance.html"><button class="filter-btn" data-category="finance">Finance</button> </a>
+        <a href="./technology.html"><button class="filter-btn" data-category="technology">Technology</button> </a>
+        <a href="./education.html"><button class="filter-btn" data-category="education">Education</button> </a>
+        <a href="./home.html" class="back-btn" style="text-decoration: none; color: #2c3e50;"><button class="filter-btn" data-category="education">HOME</button></a>
+
+    </nav>
+
+    <main>
+        <section class="articles">
+            <div class="article-card" data-category="ai">
+                <h2>How AI is Revolutionizing the World</h2>
+                <p>Artificial Intelligence is transforming industries, making processes faster and smarter.</p>
+            </div>
+            
+            <div class="article-card" data-category="blockchain">
+                <h2>Blockchain Beyond Cryptocurrency</h2>
+                <p>Explore how blockchain technology is being used beyond Bitcoin and digital currencies.</p>
+            </div>
+
+            <div class="article-card" data-category="gadgets">
+                <h2>Smart Gadgets to Watch in 2025</h2>
+                <p>The top innovations in consumer technology that are set to change our daily lives.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Latest in Technology. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
